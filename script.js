@@ -27,17 +27,43 @@ function userChooseOption () {
 
 
 //Funkcia na porovnanie vybraných možností a vypísanie výsledku
-function compareOptions (computer, user) {
+function compareOptions () {
+    user = userChooseOption();
+    computer = computerChooseOption()
     gameResult = (3 + user - computer) % 3;
-    console.log("výsledok " + gameResult)
+    console.log("result " + gameResult)
     if (gameResult == 1) {
-        console.log("YOU ARE WINNER")
+        alert("YOU WON ROUND")
     } else if ( gameResult == 2) {
-        console.log("YOU ARE LOOSER")
+        alert("YOU LOST ROUND")
     } else {
-        console.log("IT IS A DRAW")
+        alert("IT IS A DRAW")
     }
     return gameResult
 };
 
-compareOptions(computerChooseOption(), userChooseOption())
+
+function game () {
+    let userScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        let roundResult = compareOptions()
+        if (roundResult == 1) {
+            userScore++
+        } else if (roundResult == 2) {
+            computerScore++
+        } else {
+            userScore++;
+            computerScore++;
+        };
+        console.log("user score " + userScore);
+        console.log("pc score " + computerScore);
+    };
+    if (userScore > computerScore) {
+        alert("You won the game" + " " + userScore + ":" + computerScore)
+    } else if (userScore < computerScore) {
+        alert("You lost the game" + " "+ userScore + ":" + computerScore)
+    } else alert("It is a draw" + " " + userScore + ":" + computerScore)
+};
+
+game();
