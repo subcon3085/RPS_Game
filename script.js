@@ -1,4 +1,4 @@
-//Funkcia náhodného výberu možnosti(0 = ROCK, 1 = PAPER, 2 = SCISSORS)
+//Funkcia náhodného výberu PC (0 = ROCK, 1 = PAPER, 2 = SCISSORS)
 function computerChooseOption () {
     const computerChoosenOption = Math.floor(Math.random() * 3);
     console.log("PC " + computerChoosenOption);
@@ -26,11 +26,11 @@ function userChooseOption () {
 
 
 
-//Funkcia na porovnanie vybraných možností a vypísanie výsledku
+//Funkcia na porovnanie vybraných možností a vypísanie výsledku kola
 function compareOptions () {
-    user = userChooseOption();
-    computer = computerChooseOption()
-    gameResult = (3 + user - computer) % 3;
+    let user = userChooseOption();
+    let computer = computerChooseOption()
+    let gameResult = (3 + user - computer) % 3;
     console.log("result " + gameResult)
     if (gameResult == 1) {
         alert("YOU WON ROUND")
@@ -42,7 +42,7 @@ function compareOptions () {
     return gameResult
 };
 
-
+//Funkcia počítania kôl, score a vypísanie výsledku hry
 function game () {
     let userScore = 0;
     let computerScore = 0;
