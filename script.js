@@ -1,69 +1,60 @@
-//Funkcia náhodného výberu PC (0 = ROCK, 1 = PAPER, 2 = SCISSORS)
-function computerChooseOption () {
-    const computerChoosenOption = Math.floor(Math.random() * 3);
-    console.log("PC " + computerChoosenOption);
-    return computerChoosenOption
-};
+//Po kliknutí na button START voláme funkciu oneRound
+const element = document.getElementById("start");
+element.addEventListener("click", oneRound);
+const result = document.getElementById("result")
 
 
-
-//Funkcia výberu užívateľa ktorá akceptuje input užívateľa
-function userChooseOption () {
-    let userChoosenOption = prompt("Choose your option: ROCK, PAPER or SCISSORS");
-    userChoosenOption = userChoosenOption.toUpperCase();
-    if (userChoosenOption == "ROCK") {
-        userChoosenOption = 0
-    } else if (userChoosenOption == "PAPER") {
-        userChoosenOption = 1
-    } else if (userChoosenOption == "SCISSORS") {
-        userChoosenOption = 2
-    } else {
-        alert("WRONG INPUT!")
-    };
-    console.log("user " + userChoosenOption);
-    return userChoosenOption
-};
+//Funkcia jedného kola po stisknutí štart
+function oneRound() {
+    pressStart();
+    buttonRock.addEventListener("click", () => compareOptions(0));
+    buttonPaper.addEventListener("click", () => compareOptions(1));
+    buttonScissors.addEventListener("click", () => compareOptions(2));
+}
 
 
-
-//Funkcia na porovnanie vybraných možností a vypísanie výsledku kola
-function compareOptions () {
-    let user = userChooseOption();
+//Vyhodnotí výhercu kola a vypíše výsledok 
+function compareOptions (user) {
     let computer = computerChooseOption()
     let gameResult = (3 + user - computer) % 3;
+    console.log(user);
+    console.log(computer);
     console.log("result " + gameResult)
     if (gameResult == 1) {
-        alert("YOU WON ROUND")
+        result.innerHTML= "YOU WON THIS ROUND"
     } else if ( gameResult == 2) {
-        alert("YOU LOST ROUND")
+        result.innerHTML= "YOU LOST THIS ROUND"
     } else {
-        alert("IT IS A DRAW")
+        result.innerHTML= "IT IS A DRAW"
     }
     return gameResult
 };
 
-//Funkcia počítania kôl, score a vypísanie výsledku hry
-function game () {
-    let userScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let roundResult = compareOptions()
-        if (roundResult == 1) {
-            userScore++
-        } else if (roundResult == 2) {
-            computerScore++
-        } else {
-            userScore++;
-            computerScore++;
-        };
-        console.log("user score " + userScore);
-        console.log("pc score " + computerScore);
-    };
-    if (userScore > computerScore) {
-        alert("You won the game" + " " + userScore + ":" + computerScore)
-    } else if (userScore < computerScore) {
-        alert("You lost the game" + " "+ userScore + ":" + computerScore)
-    } else alert("It is a draw" + " " + userScore + ":" + computerScore)
+
+
+//Funkcia odmaže button start a pridá inštrukcie + 3 buttony výberu RPS
+function pressStart() {
+    
+    const container2 = document.getElementById("container2");
+    const startButton = document.getElementById("start");
+    const info = document.getElementById("info");
+    startButton.remove();
+
+    info.innerHTML = "CHOOSE YOUR WEAPON";
+    buttonRock = document.createElement('button');
+    buttonRock.setAttribute("id", "rock");
+    buttonRock.innerHTML = "ROCK";
+    buttonPaper = document.createElement('button');
+    buttonPaper.setAttribute("id", "paper");
+    buttonPaper.innerHTML = "PAPER";
+    buttonScissors = document.createElement('button');
+    buttonScissors.setAttribute("id", "scissors");
+    buttonScissors.innerHTML = "SCISSORS";
+    container2.append(buttonRock, buttonPaper, buttonScissors);
 };
 
-game();
+//Funkcia náhodného výberu PC (0 = ROCK, 1 = PAPER, 2 = SCISSORS)
+function computerChooseOption () {
+    const computerChoosenOption = Math.floor(Math.random() * 3);
+    return computerChoosenOption
+}
